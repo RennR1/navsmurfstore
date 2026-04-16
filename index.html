@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Payment Nav Smurf Store</title>
+    <link rel="shortcut icon" href="ns.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .payment-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 40px;
+            padding: 30px 25px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .store-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .store-header p {
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+        /* Logo di Tengah */
+        .logo-center {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo-circle {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border: 3px solid #2a5298;
+            overflow: hidden;
+        }
+
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Fallback jika gambar tidak ada */
+        .logo-circle i {
+            font-size: 55px;
+            color: #2a5298;
+        }
+
+        .logo-text {
+            margin-top: 12px;
+            font-weight: 600;
+            color: #1e3c72;
+            font-size: 0.9rem;
+        }
+
+        .section-title {
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            margin: 25px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #2a5298;
+            font-size: 1.2rem;
+        }
+
+        .payment-method {
+            background: #f8f9fc;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            border: 1px solid #eef2f8;
+            cursor: pointer;
+        }
+
+        .payment-method:hover {
+            background: #ffffff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-color: #2a5298;
+        }
+
+        .method-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .method-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(145deg, #1e3c72, #2a5298);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+        }
+
+        .method-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #1e3c72;
+        }
+
+        .method-detail {
+            padding-left: 57px;
+        }
+
+        .account-number {
+            font-family: monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2c3e66;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 12px;
+            display: inline-block;
+            margin: 5px 0;
+            letter-spacing: 0.5px;
+            border: 1px solid #e0e8f0;
+        }
+
+        .account-name {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+
+        .copy-btn {
+            background: #2a5298;
+            border: none;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #1e3c72;
+        }
+
+        .warning-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #856404;
+        }
+
+        .warning-note i {
+            margin-right: 8px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 25px 0 15px;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .wa-btn {
+            background: #25D366;
+            color: white;
+        }
+
+        .wa-btn:hover {
+            background: #128C7E;
+            transform: scale(1.05);
+        }
+
+        .ig-btn {
+            background: linear-gradient(45deg, #f09433, #d62976, #962fbf);
+            color: white;
+        }
+
+        .ig-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.7rem;
+        }
+
+        .toast-notif {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1e3c72;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .toast-notif.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 500px) {
+            .payment-card {
+                padding: 20px;
+            }
+            .method-detail {
+                padding-left: 0;
+            }
+            .social-btn {
+                padding: 10px 18px;
+                font-size: 0.8rem;
+            }
+            .logo-circle {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="payment-card">
+        <div class="store-header">
+            <h1>💳 Payment Nav Smurf Store</h1>
+            <p>Bayar Mudah • Cepat • Terpercaya</p>
+        </div>
+
+        <!-- LOGO DI TENGAH - GANTI src="ns.png" DENGAN FILE FOTO ANDA -->
+        <div class="logo-center">
+            <div class="logo-circle">
+                <img src="ns.png" alt="Nav Smurf Logo" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fas fa-store\'></i>';">
+            </div>
+        </div>
+        <div class="logo-text">NAV SMURF STORE</div>
+
+        <div class="section-title">
+            <i class="fas fa-wallet"></i>
+            <span>Metode Pembayaran</span>
+        </div>
+
+        <!-- DANA -->
+        <div class="payment-method">
+            <div class="method-header">
+                <div class="method-icon"><i class="fas fa-mobile-alt"></i></div>
+                <div class="method-name">DANA</div>
+            </div>
+            <div class="method-detail">
+                <div class="account-number" id="danaNumber">082364908421</div>
+                <button class="copy-btn" onclick="copyToClipboard('082364908421', 'DANA')"><i class="fas fa-copy"></i> Salin Nomor</button>
+                <div class="account-name">A/N Hasan</div>
+            </div>
+        </div>
+
+        <!-- Seabank -->
+        <div class="payment-method">
+            <div class="method-header">
+                <div class="method-icon"><i class="fas fa-university"></i></div>
+                <div class="method-name">Seabank</div>
+            </div>
+            <div class="method-detail">
+                <div class="account-number" id="seabankNumber">901449515966</div>
+                <button class="copy-btn" onclick="copyToClipboard('901449515966', 'Seabank')"><i class="fas fa-copy"></i> Salin No. Rekening</button>
+                <div class="account-name">A/N Geo</div>
+            </div>
+        </div>
+
+        <!-- GoPay -->
+        <div class="payment-method">
+            <div class="method-header">
+                <div class="method-icon"><i class="fas fa-qrcode"></i></div>
+                <div class="method-name">GoPay</div>
+            </div>
+            <div class="method-detail">
+                <div class="account-number" id="gopayNumber">085219731174</div>
+                <button class="copy-btn" onclick="copyToClipboard('085219731174', 'GoPay')"><i class="fas fa-copy"></i> Salin Nomor</button>
+                <div class="account-name">A/N Geo</div>
+            </div>
+        </div>
+
+        <!-- BCA -->
+        <div class="payment-method">
+            <div class="method-header">
+                <div class="method-icon"><i class="fas fa-building-columns"></i></div>
+                <div class="method-name">BCA</div>
+            </div>
+            <div class="method-detail">
+                <div class="account-number" id="bcaNumber">2010842665</div>
+                <button class="copy-btn" onclick="copyToClipboard('2010842665', 'BCA')"><i class="fas fa-copy"></i> Salin No. Rekening</button>
+                <div class="account-name">A/N Geo</div>
+            </div>
+        </div>
+
+        <!-- QRIS -->
+        <div class="payment-method">
+            <div class="method-header">
+                <div class="method-icon"><i class="fas fa-qrcode"></i></div>
+                <div class="method-name">QRIS</div>
+            </div>
+            <div class="method-detail">
+                <div class="warning-note">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    QRIS Wajib Minta Admin! Silakan hubungi admin melalui WhatsApp atau Instagram.
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <i class="fas fa-headset"></i>
+            <span>Hubungi Admin</span>
+        </div>
+
+        <div class="social-links">
+            <a href="https://wa.me/6285385628173" target="_blank" class="social-btn wa-btn">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <a href="https://www.instagram.com/nav.smurf.jbid" target="_blank" class="social-btn ig-btn">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+        </div>
+
+        <div class="footer">
+            <i class="fas fa-shield-alt"></i> Pembayaran Aman & Terpercaya
+        </div>
+    </div>
+    <div class="footer" style="margin-top: 15px;">
+        © 2026 Nav Smurf Store • All Rights Reserved
+    </div>
+</div>
+
+<div id="toast" class="toast-notif">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMessage">Tersalin!</span>
+</div>
+
+<script>
+    function copyToClipboard(text, methodName) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast(`${methodName}: ${text} berhasil disalin!`);
+        }).catch(() => {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showToast(`${methodName}: ${text} berhasil disalin!`);
+        });
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        toastMessage.innerText = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2500);
+    }
+</script>
+</body>
+</html>
