@@ -36,11 +36,7 @@
             color: transparent;
         }
 
-        .store-header p {
-            color: #666;
-            font-size: 0.85rem;
-            margin-top: 5px;
-        }
+        .store-header p { color: #666; font-size: 0.85rem; margin-top: 5px; }
 
         /* Logo */
         .logo-center { margin: 20px 0; display: flex; justify-content: center; }
@@ -58,6 +54,16 @@
         }
         .logo-circle img { width: 100%; height: 100%; object-fit: cover; }
         .logo-text { margin-top: 12px; font-weight: 600; color: #1e3c72; }
+
+        /* Pesan error jika gambar tidak ditemukan */
+        .error-msg {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            margin-top: 5px;
+        }
 
         .section-title {
             text-align: left;
@@ -80,13 +86,7 @@
             border: 1px solid #eef2f8;
         }
 
-        .method-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
+        .method-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
         .method-icon {
             width: 45px;
             height: 45px;
@@ -98,7 +98,6 @@
             color: white;
             font-size: 1.4rem;
         }
-
         .method-name { font-weight: 700; font-size: 1.2rem; color: #1e3c72; }
         .method-detail { padding-left: 57px; }
 
@@ -114,7 +113,6 @@
             margin: 5px 0;
             border: 1px solid #e0e8f0;
         }
-
         .account-name { color: #666; font-size: 0.8rem; margin-top: 4px; }
 
         .copy-btn {
@@ -264,13 +262,16 @@
             <p>Bayar Mudah • Cepat • Terpercaya</p>
         </div>
 
-        <!-- LOGO - Ganti src="NS.png" dengan nama file logo Anda -->
+        <!-- LOGO - Ganti "NS.png" dengan NAMA FILE LOGO ANDA -->
         <div class="logo-center">
             <div class="logo-circle">
-                <img src="NS.png" alt="Nav Smurf Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-store\' style=\'font-size:55px; color:#2a5298;\'></i>';">
+                <img src="NS.png" alt="Nav Smurf Logo" id="logoImage">
             </div>
         </div>
         <div class="logo-text">NAV SMURF STORE</div>
+        <div id="logoError" class="error-msg" style="display: none;">
+            ⚠️ File logo tidak ditemukan! Pastikan file "NS.png" ada di folder yang sama.
+        </div>
 
         <div class="section-title">
             <i class="fas fa-wallet"></i>
@@ -329,7 +330,7 @@
             </div>
         </div>
 
-        <!-- QRIS - Ganti src="QR.png" dengan nama file QRIS Anda -->
+        <!-- QRIS - Ganti "QR.png" dengan NAMA FILE QRIS ANDA -->
         <div class="payment-method">
             <div class="method-header">
                 <div class="method-icon"><i class="fas fa-qrcode"></i></div>
@@ -337,7 +338,10 @@
             </div>
             <div class="method-detail">
                 <div class="qris-container">
-                    <img src="QR.png" alt="QRIS Code" class="qris-image" id="qrisImage" onclick="openModal()" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=QRIS+Tidak+Ditemukan&font=montserrat'; this.style.padding='0';">
+                    <img src="QR.png" alt="QRIS Code" class="qris-image" id="qrisImage" onclick="openModal()">
+                    <div id="qrisError" class="error-msg" style="display: none;">
+                        ⚠️ File QRIS tidak ditemukan! Pastikan file "QR.png" ada di folder yang sama.
+                    </div>
                     <div class="qris-buttons">
                         <button class="qris-btn" onclick="downloadQRIS()"><i class="fas fa-download"></i> Download QRIS</button>
                         <button class="qris-btn" onclick="openModal()"><i class="fas fa-search-plus"></i> Perbesar</button>
@@ -392,14 +396,37 @@
 </div>
 
 <script>
-    const qrisImage = document.getElementById('qrisImage');
+    const logoImg = document.getElementById('logoImage');
+    const logoError = document.getElementById('logoError');
+    const qrisImg = document.getElementById('qrisImage');
+    const qrisError = document.getElementById('qrisError');
     const modal = document.getElementById('qrisModal');
     const modalImage = document.getElementById('modalQrisImage');
 
+    // Cek apakah logo berhasil dimuat
+    logoImg.onerror = function() {
+        logoError.style.display = 'block';
+        logoImg.style.display = 'none';
+    };
+    logoImg.onload = function() {
+        logoError.style.display = 'none';
+        logoImg.style.display = 'block';
+    };
+
+    // Cek apakah QRIS berhasil dimuat
+    qrisImg.onerror = function() {
+        qrisError.style.display = 'block';
+    };
+    qrisImg.onload = function() {
+        qrisError.style.display = 'none';
+    };
+
     function openModal() {
-        if (qrisImage && qrisImage.src) {
-            modalImage.src = qrisImage.src;
+        if (qrisImg && qrisImg.src && !qrisImg.src.includes('undefined')) {
+            modalImage.src = qrisImg.src;
             modal.style.display = 'flex';
+        } else {
+            showToast('Gambar QRIS tidak ditemukan!', 'error');
         }
     }
 
@@ -412,24 +439,24 @@
     }
 
     function downloadQRIS() {
-        if (qrisImage && qrisImage.src && !qrisImage.src.includes('placehold')) {
+        if (qrisImg && qrisImg.src && qrisImg.complete && qrisImg.naturalHeight !== 0) {
             const link = document.createElement('a');
             link.download = 'QRIS_Nav_Smurf_Store.png';
-            link.href = qrisImage.src;
+            link.href = qrisImg.src;
             link.click();
-            showToast('QRIS berhasil diunduh!', 'success');
+            showToast('QRIS berhasil diunduh!');
         } else {
             showToast('Gambar QRIS tidak ditemukan!', 'error');
         }
     }
 
     function downloadModalQRIS() {
-        if (modalImage && modalImage.src && !modalImage.src.includes('placehold')) {
+        if (modalImage && modalImage.src) {
             const link = document.createElement('a');
             link.download = 'QRIS_Nav_Smurf_Store.png';
             link.href = modalImage.src;
             link.click();
-            showToast('QRIS berhasil diunduh!', 'success');
+            showToast('QRIS berhasil diunduh!');
         } else {
             showToast('Gambar QRIS tidak ditemukan!', 'error');
         }
