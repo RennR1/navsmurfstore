@@ -8,11 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -21,10 +17,7 @@
             padding: 20px;
         }
 
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-        }
+        .container { max-width: 500px; margin: 0 auto; }
 
         .payment-card {
             background: rgba(255, 255, 255, 0.98);
@@ -32,11 +25,6 @@
             padding: 30px 25px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
             text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .payment-card:hover {
-            transform: translateY(-5px);
         }
 
         .store-header h1 {
@@ -46,7 +34,6 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: -0.5px;
         }
 
         .store-header p {
@@ -55,17 +42,12 @@
             margin-top: 5px;
         }
 
-        /* Logo di Tengah */
-        .logo-center {
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-        }
-
+        /* Logo */
+        .logo-center { margin: 20px 0; display: flex; justify-content: center; }
         .logo-circle {
             width: 120px;
             height: 120px;
-            background: white;
+            background: #f0f0f0;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -74,24 +56,8 @@
             border: 3px solid #2a5298;
             overflow: hidden;
         }
-
-        .logo-circle img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .logo-circle i {
-            font-size: 55px;
-            color: #2a5298;
-        }
-
-        .logo-text {
-            margin-top: 12px;
-            font-weight: 600;
-            color: #1e3c72;
-            font-size: 0.9rem;
-        }
+        .logo-circle img { width: 100%; height: 100%; object-fit: cover; }
+        .logo-text { margin-top: 12px; font-weight: 600; color: #1e3c72; }
 
         .section-title {
             text-align: left;
@@ -104,26 +70,14 @@
             align-items: center;
             gap: 10px;
         }
-
-        .section-title i {
-            color: #2a5298;
-            font-size: 1.2rem;
-        }
+        .section-title i { color: #2a5298; }
 
         .payment-method {
             background: #f8f9fc;
             border-radius: 20px;
             padding: 15px;
             margin-bottom: 15px;
-            transition: all 0.3s;
             border: 1px solid #eef2f8;
-            cursor: pointer;
-        }
-
-        .payment-method:hover {
-            background: #ffffff;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            border-color: #2a5298;
         }
 
         .method-header {
@@ -145,15 +99,8 @@
             font-size: 1.4rem;
         }
 
-        .method-name {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #1e3c72;
-        }
-
-        .method-detail {
-            padding-left: 57px;
-        }
+        .method-name { font-weight: 700; font-size: 1.2rem; color: #1e3c72; }
+        .method-detail { padding-left: 57px; }
 
         .account-number {
             font-family: monospace;
@@ -165,15 +112,10 @@
             border-radius: 12px;
             display: inline-block;
             margin: 5px 0;
-            letter-spacing: 0.5px;
             border: 1px solid #e0e8f0;
         }
 
-        .account-name {
-            color: #666;
-            font-size: 0.8rem;
-            margin-top: 4px;
-        }
+        .account-name { color: #666; font-size: 0.8rem; margin-top: 4px; }
 
         .copy-btn {
             background: #2a5298;
@@ -184,42 +126,21 @@
             font-size: 0.7rem;
             cursor: pointer;
             margin-left: 10px;
-            transition: 0.2s;
         }
+        .copy-btn:hover { background: #1e3c72; }
 
-        .copy-btn:hover {
-            background: #1e3c72;
-        }
-
-        /* QRIS Container dengan QR Code */
-        .qris-container {
-            text-align: center;
-            margin-top: 10px;
-        }
-
+        /* QRIS */
+        .qris-container { text-align: center; margin-top: 10px; }
         .qris-image {
             max-width: 200px;
             width: 100%;
-            height: auto;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             background: white;
             padding: 10px;
             cursor: pointer;
-            transition: transform 0.2s;
         }
-
-        .qris-image:hover {
-            transform: scale(1.02);
-        }
-
-        .qris-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 12px;
-        }
-
+        .qris-buttons { display: flex; gap: 10px; justify-content: center; margin-top: 12px; }
         .qris-btn {
             background: linear-gradient(135deg, #1e3c72, #2a5298);
             border: none;
@@ -229,16 +150,11 @@
             font-size: 0.75rem;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
         }
-
-        .qris-btn:hover {
-            transform: scale(1.05);
-            background: linear-gradient(135deg, #2a5298, #1e3c72);
-        }
+        .qris-btn:hover { transform: scale(1.05); }
 
         .warning-note {
             background: #fff3cd;
@@ -250,42 +166,26 @@
             color: #856404;
         }
 
-        .warning-note i {
-            margin-right: 8px;
-        }
-
-        /* Modal untuk Perbesar QRIS */
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(8px);
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            cursor: pointer;
         }
-
-        .modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            text-align: center;
-            position: relative;
-        }
-
+        .modal-content { text-align: center; position: relative; }
         .modal-content img {
-            max-width: 100%;
+            max-width: 90vw;
             max-height: 80vh;
             border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             background: white;
             padding: 15px;
         }
-
         .close-modal {
             position: absolute;
             top: -40px;
@@ -298,15 +198,7 @@
             border-radius: 50%;
             font-size: 1.5rem;
             cursor: pointer;
-            transition: 0.2s;
         }
-
-        .close-modal:hover {
-            transform: scale(1.1);
-            background: #1e3c72;
-            color: white;
-        }
-
         .modal-download-btn {
             margin-top: 20px;
             background: linear-gradient(135deg, #25D366, #128C7E);
@@ -320,20 +212,9 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            transition: 0.2s;
         }
 
-        .modal-download-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin: 25px 0 15px;
-        }
-
+        .social-links { display: flex; gap: 20px; justify-content: center; margin: 25px 0 15px; }
         .social-btn {
             display: inline-flex;
             align-items: center;
@@ -344,32 +225,11 @@
             font-weight: 600;
             transition: 0.3s;
         }
+        .wa-btn { background: #25D366; color: white; }
+        .ig-btn { background: linear-gradient(45deg, #f09433, #d62976, #962fbf); color: white; }
+        .social-btn:hover { transform: scale(1.05); }
 
-        .wa-btn {
-            background: #25D366;
-            color: white;
-        }
-
-        .wa-btn:hover {
-            background: #128C7E;
-            transform: scale(1.05);
-        }
-
-        .ig-btn {
-            background: linear-gradient(45deg, #f09433, #d62976, #962fbf);
-            color: white;
-        }
-
-        .ig-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.7rem;
-        }
+        .footer { text-align: center; margin-top: 20px; color: rgba(255, 255, 255, 0.6); font-size: 0.7rem; }
 
         .toast-notif {
             position: fixed;
@@ -385,31 +245,14 @@
             gap: 10px;
             z-index: 1000;
             transition: transform 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-
-        .toast-notif.show {
-            transform: translateX(-50%) translateY(0);
-        }
+        .toast-notif.show { transform: translateX(-50%) translateY(0); }
 
         @media (max-width: 500px) {
-            .payment-card {
-                padding: 20px;
-            }
-            .method-detail {
-                padding-left: 0;
-            }
-            .social-btn {
-                padding: 10px 18px;
-                font-size: 0.8rem;
-            }
-            .logo-circle {
-                width: 100px;
-                height: 100px;
-            }
-            .qris-image {
-                max-width: 180px;
-            }
+            .payment-card { padding: 20px; }
+            .method-detail { padding-left: 0; }
+            .social-btn { padding: 10px 18px; font-size: 0.8rem; }
+            .logo-circle { width: 100px; height: 100px; }
         }
     </style>
 </head>
@@ -421,10 +264,10 @@
             <p>Bayar Mudah • Cepat • Terpercaya</p>
         </div>
 
-        <!-- LOGO DI TENGAH - GANTI src="ns.png" DENGAN FILE FOTO ANDA -->
+        <!-- LOGO - Ganti src="NS.png" dengan nama file logo Anda -->
         <div class="logo-center">
             <div class="logo-circle">
-                <img src="NS.png" alt="Nav Smurf Logo">
+                <img src="NS.png" alt="Nav Smurf Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-store\' style=\'font-size:55px; color:#2a5298;\'></i>';">
             </div>
         </div>
         <div class="logo-text">NAV SMURF STORE</div>
@@ -441,8 +284,8 @@
                 <div class="method-name">DANA</div>
             </div>
             <div class="method-detail">
-                <div class="account-number" id="danaNumber">082364908421</div>
-                <button class="copy-btn" onclick="copyToClipboard('082364908421', 'DANA')"><i class="fas fa-copy"></i> Salin Nomor</button>
+                <div class="account-number">082364908421</div>
+                <button class="copy-btn" onclick="copyToClipboard('082364908421', 'DANA')"><i class="fas fa-copy"></i> Salin</button>
                 <div class="account-name">A/N Hasan</div>
             </div>
         </div>
@@ -454,8 +297,8 @@
                 <div class="method-name">Seabank</div>
             </div>
             <div class="method-detail">
-                <div class="account-number" id="seabankNumber">901449515966</div>
-                <button class="copy-btn" onclick="copyToClipboard('901449515966', 'Seabank')"><i class="fas fa-copy"></i> Salin No. Rekening</button>
+                <div class="account-number">901449515966</div>
+                <button class="copy-btn" onclick="copyToClipboard('901449515966', 'Seabank')"><i class="fas fa-copy"></i> Salin</button>
                 <div class="account-name">A/N Geo</div>
             </div>
         </div>
@@ -467,8 +310,8 @@
                 <div class="method-name">GoPay</div>
             </div>
             <div class="method-detail">
-                <div class="account-number" id="gopayNumber">085219731174</div>
-                <button class="copy-btn" onclick="copyToClipboard('085219731174', 'GoPay')"><i class="fas fa-copy"></i> Salin Nomor</button>
+                <div class="account-number">085219731174</div>
+                <button class="copy-btn" onclick="copyToClipboard('085219731174', 'GoPay')"><i class="fas fa-copy"></i> Salin</button>
                 <div class="account-name">A/N Geo</div>
             </div>
         </div>
@@ -480,13 +323,13 @@
                 <div class="method-name">BCA</div>
             </div>
             <div class="method-detail">
-                <div class="account-number" id="bcaNumber">2010842665</div>
-                <button class="copy-btn" onclick="copyToClipboard('2010842665', 'BCA')"><i class="fas fa-copy"></i> Salin No. Rekening</button>
+                <div class="account-number">2010842665</div>
+                <button class="copy-btn" onclick="copyToClipboard('2010842665', 'BCA')"><i class="fas fa-copy"></i> Salin</button>
                 <div class="account-name">A/N Geo</div>
             </div>
         </div>
 
-        <!-- QRIS dengan Tombol Download & Perbesar -->
+        <!-- QRIS - Ganti src="QR.png" dengan nama file QRIS Anda -->
         <div class="payment-method">
             <div class="method-header">
                 <div class="method-icon"><i class="fas fa-qrcode"></i></div>
@@ -494,19 +337,14 @@
             </div>
             <div class="method-detail">
                 <div class="qris-container">
-                    <!-- Ganti src qris.png dengan file QRIS Anda -->
-                    <img src="QR.png" alt="QRIS Code" class="qris-image" id="qrisImage" onclick="openModal()" onerror="this.onerror=null; this.src='https://via.placeholder.com/200x200?text=QRIS+Code';">
+                    <img src="QR.png" alt="QRIS Code" class="qris-image" id="qrisImage" onclick="openModal()" onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=QRIS+Tidak+Ditemukan&font=montserrat'; this.style.padding='0';">
                     <div class="qris-buttons">
-                        <button class="qris-btn" onclick="downloadQRIS()">
-                            <i class="fas fa-download"></i> Download QRIS
-                        </button>
-                        <button class="qris-btn" onclick="openModal()">
-                            <i class="fas fa-search-plus"></i> Perbesar
-                        </button>
+                        <button class="qris-btn" onclick="downloadQRIS()"><i class="fas fa-download"></i> Download QRIS</button>
+                        <button class="qris-btn" onclick="openModal()"><i class="fas fa-search-plus"></i> Perbesar</button>
                     </div>
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
-                        Scan QRIS di atas untuk melakukan pembayaran. Jika ada kendala, hubungi admin.
+                        Scan QRIS di atas untuk pembayaran. Jika ada kendala, hubungi admin.
                     </div>
                 </div>
             </div>
@@ -535,7 +373,7 @@
     </div>
 </div>
 
-<!-- Modal untuk Perbesar QRIS -->
+<!-- Modal Perbesar QRIS -->
 <div id="qrisModal" class="modal" onclick="closeModalOnClick(event)">
     <div class="modal-content">
         <button class="close-modal" onclick="closeModal()">&times;</button>
@@ -554,36 +392,27 @@
 </div>
 
 <script>
-    // Mendapatkan elemen gambar QRIS
     const qrisImage = document.getElementById('qrisImage');
     const modal = document.getElementById('qrisModal');
     const modalImage = document.getElementById('modalQrisImage');
 
-    // Fungsi untuk membuka modal (perbesar)
     function openModal() {
         if (qrisImage && qrisImage.src) {
             modalImage.src = qrisImage.src;
             modal.style.display = 'flex';
-        } else {
-            showToast('Gambar QRIS tidak ditemukan!', 'error');
         }
     }
 
-    // Fungsi untuk menutup modal
     function closeModal() {
         modal.style.display = 'none';
     }
 
-    // Tutup modal jika klik di luar konten
     function closeModalOnClick(event) {
-        if (event.target === modal) {
-            closeModal();
-        }
+        if (event.target === modal) closeModal();
     }
 
-    // Fungsi download QRIS dari halaman utama
     function downloadQRIS() {
-        if (qrisImage && qrisImage.src) {
+        if (qrisImage && qrisImage.src && !qrisImage.src.includes('placehold')) {
             const link = document.createElement('a');
             link.download = 'QRIS_Nav_Smurf_Store.png';
             link.href = qrisImage.src;
@@ -594,9 +423,8 @@
         }
     }
 
-    // Fungsi download QRIS dari modal
     function downloadModalQRIS() {
-        if (modalImage && modalImage.src) {
+        if (modalImage && modalImage.src && !modalImage.src.includes('placehold')) {
             const link = document.createElement('a');
             link.download = 'QRIS_Nav_Smurf_Store.png';
             link.href = modalImage.src;
@@ -607,10 +435,9 @@
         }
     }
 
-    // Copy to clipboard function
     function copyToClipboard(text, methodName) {
         navigator.clipboard.writeText(text).then(() => {
-            showToast(`${methodName}: ${text} berhasil disalin!`, 'success');
+            showToast(`${methodName}: ${text} berhasil disalin!`);
         }).catch(() => {
             const textarea = document.createElement('textarea');
             textarea.value = text;
@@ -618,26 +445,20 @@
             textarea.select();
             document.execCommand('copy');
             document.body.removeChild(textarea);
-            showToast(`${methodName}: ${text} berhasil disalin!`, 'success');
+            showToast(`${methodName}: ${text} berhasil disalin!`);
         });
     }
 
-    // Toast notification
-    function showToast(message, type = 'success') {
+    function showToast(message) {
         const toast = document.getElementById('toast');
         const toastMessage = document.getElementById('toastMessage');
         toastMessage.innerText = message;
         toast.classList.add('show');
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 2500);
+        setTimeout(() => toast.classList.remove('show'), 2500);
     }
 
-    // Event listener untuk menutup modal dengan tombol ESC
     document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && modal.style.display === 'flex') {
-            closeModal();
-        }
+        if (event.key === 'Escape' && modal.style.display === 'flex') closeModal();
     });
 </script>
 </body>
