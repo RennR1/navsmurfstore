@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Payment Nav Smurf Store</title>
-    <link rel="shortcut icon" href="ns.png" type="image/x-icon">
+    <link rel="shortcut icon" href="NS.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -81,7 +81,6 @@
             object-fit: cover;
         }
 
-        /* Fallback jika gambar tidak ada */
         .logo-circle i {
             font-size: 55px;
             color: #2a5298;
@@ -192,6 +191,55 @@
             background: #1e3c72;
         }
 
+        /* QRIS Container dengan QR Code */
+        .qris-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .qris-image {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background: white;
+            padding: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .qris-image:hover {
+            transform: scale(1.02);
+        }
+
+        .qris-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
+        .qris-btn {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qris-btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+        }
+
         .warning-note {
             background: #fff3cd;
             border-left: 4px solid #ffc107;
@@ -204,6 +252,79 @@
 
         .warning-note i {
             margin-right: 8px;
+        }
+
+        /* Modal untuk Perbesar QRIS */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            cursor: pointer;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: white;
+            padding: 15px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: white;
+            color: #1e3c72;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.1);
+            background: #1e3c72;
+            color: white;
+        }
+
+        .modal-download-btn {
+            margin-top: 20px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s;
+        }
+
+        .modal-download-btn:hover {
+            transform: scale(1.05);
         }
 
         .social-links {
@@ -264,7 +385,7 @@
             gap: 10px;
             z-index: 1000;
             transition: transform 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .toast-notif.show {
@@ -286,6 +407,9 @@
                 width: 100px;
                 height: 100px;
             }
+            .qris-image {
+                max-width: 180px;
+            }
         }
     </style>
 </head>
@@ -300,7 +424,7 @@
         <!-- LOGO DI TENGAH - GANTI src="ns.png" DENGAN FILE FOTO ANDA -->
         <div class="logo-center">
             <div class="logo-circle">
-                <img src="ns.png" alt="Nav Smurf Logo" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fas fa-store\'></i>';">
+                <img src="NS.png" alt="Nav Smurf Logo" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fas fa-store\'></i>';">
             </div>
         </div>
         <div class="logo-text">NAV SMURF STORE</div>
@@ -362,16 +486,28 @@
             </div>
         </div>
 
-        <!-- QRIS -->
+        <!-- QRIS dengan Tombol Download & Perbesar -->
         <div class="payment-method">
             <div class="method-header">
                 <div class="method-icon"><i class="fas fa-qrcode"></i></div>
                 <div class="method-name">QRIS</div>
             </div>
             <div class="method-detail">
-                <div class="warning-note">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    QRIS Wajib Minta Admin! Silakan hubungi admin melalui WhatsApp atau Instagram.
+                <div class="qris-container">
+                    <!-- Ganti src qris.png dengan file QRIS Anda -->
+                    <img src="QR.png" alt="QRIS Code" class="qris-image" id="qrisImage" onclick="openModal()" onerror="this.onerror=null; this.src='https://via.placeholder.com/200x200?text=QRIS+Code';">
+                    <div class="qris-buttons">
+                        <button class="qris-btn" onclick="downloadQRIS()">
+                            <i class="fas fa-download"></i> Download QRIS
+                        </button>
+                        <button class="qris-btn" onclick="openModal()">
+                            <i class="fas fa-search-plus"></i> Perbesar
+                        </button>
+                    </div>
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Scan QRIS di atas untuk melakukan pembayaran. Jika ada kendala, hubungi admin.
+                    </div>
                 </div>
             </div>
         </div>
@@ -399,15 +535,82 @@
     </div>
 </div>
 
+<!-- Modal untuk Perbesar QRIS -->
+<div id="qrisModal" class="modal" onclick="closeModalOnClick(event)">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+        <img id="modalQrisImage" src="" alt="QRIS Code">
+        <div>
+            <button class="modal-download-btn" onclick="downloadModalQRIS()">
+                <i class="fas fa-download"></i> Download QRIS
+            </button>
+        </div>
+    </div>
+</div>
+
 <div id="toast" class="toast-notif">
     <i class="fas fa-check-circle"></i>
     <span id="toastMessage">Tersalin!</span>
 </div>
 
 <script>
+    // Mendapatkan elemen gambar QRIS
+    const qrisImage = document.getElementById('qrisImage');
+    const modal = document.getElementById('qrisModal');
+    const modalImage = document.getElementById('modalQrisImage');
+
+    // Fungsi untuk membuka modal (perbesar)
+    function openModal() {
+        if (qrisImage && qrisImage.src) {
+            modalImage.src = qrisImage.src;
+            modal.style.display = 'flex';
+        } else {
+            showToast('Gambar QRIS tidak ditemukan!', 'error');
+        }
+    }
+
+    // Fungsi untuk menutup modal
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    // Tutup modal jika klik di luar konten
+    function closeModalOnClick(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    }
+
+    // Fungsi download QRIS dari halaman utama
+    function downloadQRIS() {
+        if (qrisImage && qrisImage.src) {
+            const link = document.createElement('a');
+            link.download = 'QRIS_Nav_Smurf_Store.png';
+            link.href = qrisImage.src;
+            link.click();
+            showToast('QRIS berhasil diunduh!', 'success');
+        } else {
+            showToast('Gambar QRIS tidak ditemukan!', 'error');
+        }
+    }
+
+    // Fungsi download QRIS dari modal
+    function downloadModalQRIS() {
+        if (modalImage && modalImage.src) {
+            const link = document.createElement('a');
+            link.download = 'QRIS_Nav_Smurf_Store.png';
+            link.href = modalImage.src;
+            link.click();
+            showToast('QRIS berhasil diunduh!', 'success');
+        } else {
+            showToast('Gambar QRIS tidak ditemukan!', 'error');
+        }
+    }
+
+    // Copy to clipboard function
     function copyToClipboard(text, methodName) {
         navigator.clipboard.writeText(text).then(() => {
-            showToast(`${methodName}: ${text} berhasil disalin!`);
+            showToast(`${methodName}: ${text} berhasil disalin!`, 'success');
         }).catch(() => {
             const textarea = document.createElement('textarea');
             textarea.value = text;
@@ -415,11 +618,12 @@
             textarea.select();
             document.execCommand('copy');
             document.body.removeChild(textarea);
-            showToast(`${methodName}: ${text} berhasil disalin!`);
+            showToast(`${methodName}: ${text} berhasil disalin!`, 'success');
         });
     }
 
-    function showToast(message) {
+    // Toast notification
+    function showToast(message, type = 'success') {
         const toast = document.getElementById('toast');
         const toastMessage = document.getElementById('toastMessage');
         toastMessage.innerText = message;
@@ -428,6 +632,13 @@
             toast.classList.remove('show');
         }, 2500);
     }
+
+    // Event listener untuk menutup modal dengan tombol ESC
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && modal.style.display === 'flex') {
+            closeModal();
+        }
+    });
 </script>
 </body>
 </html>
